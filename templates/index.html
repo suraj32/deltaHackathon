@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Sem Book</title>
+</head>
+<body>
+    <header>
+        <h1>📚 My SEM BOOK</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/base{{user.id}}">Home</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <h3>Webmail: {{user.webmail}}</h3>
+    <div class="layout-container">
+        <aside class="left">
+            <h4>Pages</h4>
+            {% for page in book.pages %}
+                <li href="/index/{{book.id}}/{{page.id}}">Page {{page.id}}</li>
+            {% endfor %}
+            <a href="/newpage">+ Add page</a>
+        </aside>
+        <main>
+            <h4>Book - {{book.btitle}}</h4>
+            <form action="/savecontent/page.id" method="POST">
+                <textarea name="pagecontent" id="pgcontent" cols="100" rows="10" placeholder="Your text here...."></textarea>
+                <br>
+                <label for="img" style="font-size: 17px;">Image</label>
+                <input type="file" name="img" id="img" autocomplete="off">
+                <br>
+                <button type="submit" class="btn btn-primary">SAVE</button>
+            </form>
+        </main>
+        <aside class="right">
+            <li href="/theme1/{{page.id}}">Theme 1</li>
+            <li href="/theme2/{{page.id}}">Theme 2</li>
+        </aside>
+    </div>
+</body>
+</html>
